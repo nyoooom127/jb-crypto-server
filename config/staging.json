@@ -1,0 +1,14 @@
+{
+    "github": {
+        "clientId": "staging client id",
+        "secret": ""
+    },
+    "mysql": {
+        "password": "staging password",
+        "database": "staging database",
+        "port": "staging port"
+    },
+    "mongo": {
+        "db": "staging db"
+    }
+}

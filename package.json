@@ -5,6 +5,7 @@
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
+        "start:staging": "env NODE_ENV=staging&& node app.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {
@@ -18,6 +19,7 @@
     },
     "homepage": "https://github.com/nyoooom127/jb-crypto-server#readme",
     "dependencies": {
+        "config": "^3.3.9",
         "express": "^4.18.2"
     }
 }

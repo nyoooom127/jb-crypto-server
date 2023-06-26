@@ -1,4 +1,5 @@
 const express = require('express');
+const config = require('config');
 const app = express();
 const port = 3000;
 const host = 'localhost';
@@ -18,5 +19,8 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.listen(port, host, () => {
-    console.log(`Crypto server listening on port ${port}`);
+    console.log(config.get('mongo.db'));
+    console.log(config.get('mysql.host'));
+    console.log(config.get('github.secret'));
+    console.log(`Crypto server listening on port ${config.get('app.port')}`);
 });
