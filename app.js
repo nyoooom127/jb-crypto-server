@@ -10,6 +10,8 @@ const githubRouter = require('./routes/githubRouter');
 const notFound = require('./middlewares/404');
 const errorHandler = require('./middlewares/error');
 
+app.use(express.urlencoded({ extended: false }));
+
 app.use('/', guestRouter);
 app.use('/', userRouter);
 app.use('/github', githubRouter);
@@ -19,6 +21,7 @@ app.use(notFound);
 app.use(errorHandler);
 
 app.listen(port, host, () => {
+    console.log(`Running in environment: '${process.env.NODE_ENV}'`);
     console.log(config.get('mongo.db'));
     console.log(config.get('mysql.host'));
     console.log(config.get('github.secret'));
