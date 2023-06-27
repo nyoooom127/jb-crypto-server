@@ -7,11 +7,11 @@
         "secret": "default github secret"
     },
     "mysql": {
-        "host": "default host",
-        "user": "default user",
-        "password": "default password",
-        "database": "default database",
-        "port": "default port"
+        "host": "localhost",
+        "user": "username",
+        "password": "password",
+        "database": "mydb",
+        "port": "3306"
     },
     "mongo": {
         "host": "default host",

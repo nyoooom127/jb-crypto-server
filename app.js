@@ -22,8 +22,5 @@ app.use(errorHandler);
 
 app.listen(port, host, () => {
     console.log(`Running in environment: '${process.env.NODE_ENV}'`);
-    console.log(config.get('mongo.db'));
-    console.log(config.get('mysql.host'));
-    console.log(config.get('github.secret'));
     console.log(`Crypto server listening on port ${config.get('app.port')}`);
 });

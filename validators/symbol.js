@@ -6,7 +6,9 @@ const symbolValidator = joi.object({
         .alphanum()
         .min(3)
         .max(5)
-        .uppercase()
+        .uppercase(),
+    user_id: joi.number()
+        .required()
 });
 
 module.exports = symbolValidator;

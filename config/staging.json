@@ -4,9 +4,7 @@
         "secret": ""
     },
     "mysql": {
-        "password": "staging password",
-        "database": "staging database",
-        "port": "staging port"
+        "host": "localhost"
     },
     "mongo": {
         "db": "staging db"
