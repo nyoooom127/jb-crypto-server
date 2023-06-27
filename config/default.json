@@ -1,10 +1,11 @@
 {
     "app": {
+        "host": "localhost",
         "port": 3000
     },
     "github": {
-        "clientId": "default client id",
-        "secret": "default github secret"
+        "clientId": "9bf263d00f379c2d7784",
+        "secret": "ef9eba6133f32ed4d2ee442810e016c2013c392e"
     },
     "mysql": {
         "host": "localhost",

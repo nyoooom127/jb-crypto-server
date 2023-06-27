@@ -1,14 +1,24 @@
 const express = require('express');
 const config = require('config');
+const auth = require('./middlewares/auth');
+const path = require('path');
 const app = express();
-const port = 3000;
-const host = 'localhost';
+const port = config.get('app.port');
+const host = config.get('app.host');
 
 const guestRouter = require('./routes/guestRouter');
 const userRouter = require('./routes/userRouter');
 const githubRouter = require('./routes/githubRouter');
 const notFound = require('./middlewares/404');
 const errorHandler = require('./middlewares/error');
+
+app.use(auth.initialize());
+app.use(auth.session());
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({ extended: false }));
 
