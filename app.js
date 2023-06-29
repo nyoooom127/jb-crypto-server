@@ -13,7 +13,7 @@ const notFound = require('./middlewares/404');
 const errorHandler = require('./middlewares/error');
 
 app.use(auth.initialize());
-app.use(auth.session());
+// app.use(auth.session());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

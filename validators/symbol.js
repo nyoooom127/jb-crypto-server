@@ -7,7 +7,7 @@ const symbolValidator = joi.object({
         .min(3)
         .max(5)
         .uppercase(),
-    user_id: joi.number()
+    userId: joi.number()
         .required()
 });
 

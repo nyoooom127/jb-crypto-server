@@ -1,35 +1,38 @@
-const passport = require('passport');
 const config = require('config');
-const GitHubStrategy = require('passport-github2').Strategy;
+const passport = require('passport');
+const { Strategy: GitHubStrategy } = require('passport-github2');
 
-const { db } = require('./mysql'); 
-const User = require('../models/user');
+const { db } = require('../middlewares/mysql');
+const User = require('../models/mysql/user');
+
+const { clientId: githubClientId, secret: githubSecret } = config.get('github');
+const { host: appHost, port: appPort } = config.get('app');
 
 passport.use(new GitHubStrategy({
-        clientID: config.get('github.clientId'),
-        clientSecret: config.get('github.secret'),
-        callbackURL: `http://${config.get('app.host')}:${config.get('app.port')}/auth/github/callback`
-    },
+    clientID: githubClientId,
+    clientSecret: githubSecret,
+    callbackURL: `http://${appHost}:${appPort}/github/callback`
+},
     async (accessToken, refreshToken, profile, done) => {
         try {
             const user = new User(db);
-            let authenticatedUser = await user.findByGithubId({
-                githubId: profile.id.toString(),
-            })
+            let authUser = await user.findByGithubId({
+                githubId: profile.id.toString()
+            });
             
-            if (authenticatedUser.length === 0) {
-                const insert = await user.add({
-                    githubId: profile.id.toString(),
-                })
+            if (authUser.length === 0) {
+                const insertedUser = await user.add({
+                    githubId: profile.id.toString()
+                });
 
-                authenticatedUser = await user.findByPk({
-                    id: insert.insertId,
-                })
+                authUser = await user.findByPk({
+                    id: insertedUser.insertId
+                });
             }
 
-            return done(null, authenticatedUser[0]);
+            return done(null, authUser);
         } catch (err) {
-            return done(err);
+            return done(null);
         }
     }
 ));
