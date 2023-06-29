@@ -30,7 +30,7 @@ passport.use(new GitHubStrategy({
                 });
             }
 
-            return done(null, authUser);
+            return done(null, authUser[0]);
         } catch (err) {
             return done(null);
         }

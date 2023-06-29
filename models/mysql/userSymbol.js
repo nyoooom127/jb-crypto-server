@@ -20,6 +20,12 @@ class UserSymbol {
             userId
         ])
     }
+
+    async findDistinct() {
+        return this.db.execute(`
+        select distinct symbol from users_symbols
+        `)
+    }
 }
 
 module.exports = UserSymbol;

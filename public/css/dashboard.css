@@ -17,15 +17,48 @@ body {
 #wrapper{
     height: fit-content;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
     row-gap: 2rem;
+    max-width: 50%;
 }
 
-/* #logo {
-    height: 2rem;
-    width: 2rem;
-} */
+.symbol-wrapper{
+    height: 100px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 2rem;
+    max-width: 50%;
+    background-color: rgba(193, 142, 252, 0.1);
+    width: 30rem;
+    border-radius: 10px;
+}
+
+.symbol {
+    position: absolute;
+    top: -10px;
+    /* outline:  */
+}
+
+#logout {
+    height: 3rem;
+    width: 3rem;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 21px;
+}
+
+#logout:hover {
+    background-color: #28334b;
+}
 
 #login {
     font-size: 2rem;

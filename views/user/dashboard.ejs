@@ -1,0 +1,32 @@
+<!-- <html> -->
+    <% const getRndColor = () => {
+        const randomColor = Math.floor(Math.random()*16777215).toString(16);
+
+        return '#' + randomColor;
+    }
+    %>
+
+<head>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+
+<body>
+    <img id="logout" src="imgs/logout.svg" alt="logout" title="logout"/>
+    <div id="wrapper">
+        <% userSymbols.forEach((userSymbol, index) => { %>
+            <% const color = getRndColor();%>
+            <div id="<%= index %>" class="symbol-wrapper">
+                <div class="symbol">
+                    <%=userSymbol.symbol%>
+                </div>
+                </br>
+                <%=symbolValues.find((symbolValue) => symbolValue.symbol === userSymbol.symbol).value%>
+            </div>
+            <% }) %>
+        <div id="title">My Crypto Server</div>
+        <img id="logo" src="/imgs/logo.svg" alt="logo" />
+        <a id="login" href="/github">Login with Github</a>
+    </div>
+</body>
+
+<!-- </html> -->
