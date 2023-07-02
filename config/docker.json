@@ -8,21 +8,21 @@
         "secret": "ef9eba6133f32ed4d2ee442810e016c2013c392e"
     },
     "mysql": {
-        "host": "localhost",
+        "host": "mysql",
         "user": "username",
         "password": "password",
         "database": "mydb",
         "port": "3306"
     },
     "mongo": {
-        "host": "localhost",
+        "host": "mongo",
         "port": "27017",
         "db": "mymongo"
     },
     "worker": {
         "interval": 10000,
         "app": {
-            "host": "localhost",
+            "host": "app",
             "port": 3000
         }
     }
