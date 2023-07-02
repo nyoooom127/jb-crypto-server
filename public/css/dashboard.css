@@ -1,7 +1,7 @@
 body {
     display: flex;
     justify-content: center;
-    /* flex-direction: column; */
+    flex-direction: column;
     align-items: center;
     /* gap: 20rem; */
     background-color: #1f283b;
@@ -9,23 +9,71 @@ body {
     font-family:Arial, Helvetica, sans-serif;
 }
 
-#title {
-    font-size: 4rem;
-    cursor: default;
+#header{
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5rem;
+    width: 100%;
+    justify-content: center;
+}
+
+form {
+    width: fit-content;
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+}
+
+#symbol-input {
+    height: 50px;
+    width: 200px;
+    background-color: rgba(193, 142, 252, 0.2);
+    color: white;
+    border: solid 2px white;
+    border-radius: 21px;
+    font-size: 1.5rem;
+}
+
+#submit-symbol {
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    background-color: transparent;
+    border: unset;
+}
+
+#submit-symbol > img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 }
 
 #wrapper{
-    height: fit-content;
+    height: 100%;
+    margin: 3rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
-    row-gap: 2rem;
-    max-width: 50%;
+    gap: 5rem;
+    width: 100%;
+}
+
+#symbols-wrapper{
+    height: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+    max-width: 75%;
+    justify-content: center;
 }
 
 .symbol-wrapper{
     height: 100px;
+    width: 200px;
     display: flex;
     position: relative;
     align-items: center;
@@ -34,14 +82,22 @@ body {
     row-gap: 2rem;
     max-width: 50%;
     background-color: rgba(193, 142, 252, 0.1);
-    width: 30rem;
     border-radius: 10px;
+    font-size: 1.5rem;
 }
 
 .symbol {
+    text-align: center;
     position: absolute;
-    top: -10px;
-    /* outline:  */
+    top: -25px;
+    background-color: #30324f;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 3px;
+    font-weight: bold;
+    font-size: 1rem;
 }
 
 #logout {
@@ -58,19 +114,4 @@ body {
 
 #logout:hover {
     background-color: #28334b;
-}
-
-#login {
-    font-size: 2rem;
-    text-decoration: none;
-    border: 1px solid white;
-    border-radius: 10px;
-    padding: 1rem;
-    background-color: #2b3853;
-    color: white;
-    box-shadow: 1px 1px 2px 2px #252933;
-}
-
-#login:hover {
-    background-color: #242e44;
 }

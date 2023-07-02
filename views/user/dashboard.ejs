@@ -1,5 +1,13 @@
 <!-- <html> -->
-    <% const getRndColor = () => {
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+    var socket = io();
+    socket.on('update from express', (message) => {
+        updateSymbolValue(message.symbol, message.value);
+    })
+</script>
+<% const getRndColor=()=> {
+
         const randomColor = Math.floor(Math.random()*16777215).toString(16);
 
         return '#' + randomColor;
@@ -11,22 +19,40 @@
 </head>
 
 <body>
-    <img id="logout" src="imgs/logout.svg" alt="logout" title="logout"/>
+        <a href="/logout">
+            <img id="logout" src="imgs/logout.svg" alt="logout" title="logout" />
+        </a>
+        <div id="header">
+            <form method="POST" action="/symbol">
+                <input id="symbol-input" type="text" name="symbol" placeholder="new symbol" required />
+                <!-- <input type="submit" src="imgs/plus.svg"/> -->
+                <button id="submit-symbol" type="submit">
+                    <img src="imgs/plus.svg" alt="add" />
+                </button>
+                <!-- </input> -->
+            </form>
+        </div>
     <div id="wrapper">
-        <% userSymbols.forEach((userSymbol, index) => { %>
-            <% const color = getRndColor();%>
+            <div id="symbols-wrapper">
+                <% userSymbols.forEach((userSymbol, index)=> { %>
+                    <% const color=colors[index]; // getRndColor();%>
             <div id="<%= index %>" class="symbol-wrapper">
-                <div class="symbol">
+                            <div class="symbol" style="color: <%=color%>">
+                                <p>
                     <%=userSymbol.symbol%>
+                                </p>
                 </div>
                 </br>
-                <%=symbolValues.find((symbolValue) => symbolValue.symbol === userSymbol.symbol).value%>
+                            <%=symbolValues.find((symbolValue)=> symbolValue.symbol === userSymbol.symbol).value%>
             </div>
             <% }) %>
-        <div id="title">My Crypto Server</div>
-        <img id="logo" src="/imgs/logo.svg" alt="logo" />
-        <a id="login" href="/github">Login with Github</a>
+            </div>
     </div>
 </body>
 
+    <script>
+        const updateSymbolValue = (symbol, value) => {
+            document.getElementById(`${symbol}-value`).innerHTML = value;
+        }
+    </script>
 <!-- </html> -->
