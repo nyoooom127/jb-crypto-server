@@ -2,14 +2,15 @@ const config = require('config');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const cheerio = require('cheerio');
-const { connectMysql } = require('./middlewares/mysql');
+const { io } = require('socket.io-client');
+const { db } = require('./middlewares/mysql');
 const SymbolValue = require('./models/mongo/symbolValue');
 const UserSymbol = require('./models/mysql/userSymbol');
 
 const { host: mongoHost, port: mongoPort, db: mongoDb } = config.get('mongo');
-const { interval } = config.get('worker');
+const { interval, app: { host: appHost, port: appPort } } = config.get('worker');
 
-const db = connectMysql();
+const socket = io(`http://${appHost}:${appPort}`);
 
 const scrape = async (symbol) => {
     try {
@@ -23,12 +24,12 @@ const scrape = async (symbol) => {
             createdAt: new Date()
         });
 
-        // const symbolValue = await SymbolValue.findOneAndUpdate({ symbol: symbol }, { value: Number(value), createdAt: new Date() }, {
-        //     new: true,
-        //     upsert: true // Make this update into an upsert
-        // });
-
         await symbolValue.save();
+
+        await socket.emit('message from worker', {
+            symbol: symbolValue.symbol,
+            value: symbolValue.value,
+        });
 
         console.log(`Saved value: ${symbolValue.value} for symbol ${symbolValue.symbol}`);
 
