@@ -1,5 +1,6 @@
 <!-- <html> -->
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
     var socket = io();
     socket.on('update from express', (message) => {
@@ -8,17 +9,17 @@
 </script>
 <% const getRndColor=()=> {
 
-        const randomColor = Math.floor(Math.random()*16777215).toString(16);
+    const randomColor = Math.floor(Math.random()*16777215).toString(16);
 
-        return '#' + randomColor;
+    return '#' + randomColor;
     }
     %>
 
-<head>
-    <link rel="stylesheet" href="/css/dashboard.css" />
-</head>
+    <head>
+        <link rel="stylesheet" href="/css/dashboard.css" />
+    </head>
 
-<body>
+    <body>
         <a href="/logout">
             <img id="logout" src="imgs/logout.svg" alt="logout" title="logout" />
         </a>
@@ -32,27 +33,62 @@
                 <!-- </input> -->
             </form>
         </div>
-    <div id="wrapper">
+        <div id="wrapper">
             <div id="symbols-wrapper">
                 <% userSymbols.forEach((userSymbol, index)=> { %>
                     <% const color=colors[index]; // getRndColor();%>
-            <div id="<%= index %>" class="symbol-wrapper">
+                        <div id="<%= index %>" class="symbol-wrapper">
                             <div class="symbol" style="color: <%=color%>">
                                 <p>
-                    <%=userSymbol.symbol%>
+                                    <%=userSymbol.symbol%>
                                 </p>
-                </div>
-                </br>
+                            </div>
+                            </br>
                             <%=symbolValues.find((symbolValue)=> symbolValue.symbol === userSymbol.symbol).value%>
+                        </div>
+                        <% }) %>
             </div>
-            <% }) %>
-            </div>
-    </div>
-</body>
+            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        </div>
+    </body>
 
     <script>
         const updateSymbolValue = (symbol, value) => {
             document.getElementById(`${symbol}-value`).innerHTML = value;
         }
     </script>
-<!-- </html> -->
+    <script>
+        const xValues = [...Array(500).keys()];
+        let values = <%-timeSymbolValues%>
+
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: values
+                },
+                options: {
+                    legend: { display: true }
+                }
+            });
+    </script>
+
+    <!-- </html> -->
+    <!-- // [{
+        //     label: "<%= userSymbols[0].symbol %>",
+        //     data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+        //     borderColor: "<%= colors[0] %>",
+        //     fill: false
+        // }, {
+        //     data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+        //     borderColor: "<%= colors[1] %>",
+        //     fill: false
+        // }, {
+        //         data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+        //         borderColor: "<%= colors[2] %>",
+        //         fill: false
+        //     }] 
+                // for (var i = 0; i < timeSymbolValues.length; i++) {
+        //     values.push(timeSymbolValues[i]);
+        // } 
+        // [userSymbols.map((userSymbol, index) => timeSymbolValues.get(userSymbol.symbol).value)] -->
